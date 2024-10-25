@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Signup from "../components/Authentication/Signup";
 import Login from "../components/Authentication/Login";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const [activeTab, setActiveTab] = useState("login");
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (user) {
+      navigate("/chats");
+    }
+  });
 
   return (
     <div className="flex flex-col items-center max-w-xl mx-auto">

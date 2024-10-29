@@ -6,7 +6,12 @@ import { toast, Toaster } from "sonner";
 import Loader from "../Loader";
 import UserListItem from "../UserListItem";
 
-const UpdateGroupChatModal = ({ children, fetchAgain, setFetchAgain }) => {
+const UpdateGroupChatModal = ({
+  children,
+  fetchAgain,
+  setFetchAgain,
+  fetchMessages,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [groupChatName, setGroupChatName] = useState();
   const [search, setSearch] = useState("");
@@ -85,6 +90,7 @@ const UpdateGroupChatModal = ({ children, fetchAgain, setFetchAgain }) => {
 
       user1._id === user._id ? setSelectedChat() : setSelectedChat(data);
       setFetchAgain(!fetchAgain);
+      fetchMessages();
     } catch (error) {
       console.log(error);
     }

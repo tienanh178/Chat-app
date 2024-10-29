@@ -43,7 +43,7 @@ const SideDrawer = () => {
           </button>
         )}
 
-        <div className="fixed text-2xl left-1/2">
+        <div className="text-2xl left-1/2">
           <h1>Chat App</h1>
         </div>
 

@@ -9,7 +9,7 @@ const ChatPage = () => {
   const [fetchAgain, setFetchAgain] = useState(false);
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       {user && <SideDrawer />}
       <div className="flex justify-between w-full h-[91.5vh] p-3">
         {user && (

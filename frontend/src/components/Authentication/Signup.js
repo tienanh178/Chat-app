@@ -12,6 +12,7 @@ const Signup = () => {
   const [pic, setPic] = useState("");
   const [isShow, setIsShow] = useState(false);
   const [isShowConfirm, setIsShowConfirm] = useState(false);
+  //eslint-disable-next-line
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 

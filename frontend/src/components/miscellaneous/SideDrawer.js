@@ -1,9 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { ChatState } from "../../context/ChatProvider";
 import ProfileModal from "./ProfileModal";
 import { useNavigate } from "react-router-dom";
 import Drawer from "../Drawer";
-import { DrawerProvider, useDrawerContext } from "../../context/DrawerProvider";
+import { useDrawerContext } from "../../context/DrawerProvider";
+import { getSender } from "../../config/ChatLogics";
+import { Effect } from "react-notification-badge";
+import NotificationBadge from "react-notification-badge";
 
 const SideDrawer = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -11,6 +14,8 @@ const SideDrawer = () => {
 
   const { isOpen, handleToggle } = useDrawerContext();
   const navigate = useNavigate();
+
+  const { user, setSelectedChat, notification, setNotification } = ChatState();
 
   const handleLogout = () => {
     localStorage.removeItem("userInfo");
@@ -49,17 +54,35 @@ const SideDrawer = () => {
 
         <div className="relative">
           <button
-            className="px-4 py-2 rounded hover:bg-gray-300"
+            className="relative px-4 py-2 rounded hover:bg-gray-300"
             onClick={toggleNotifications}
           >
             <i className="fa-solid fa-bell"></i>
+            <div className="absolute top-0 right-1">
+              <NotificationBadge
+                count={notification.length}
+                effect={Effect.SCALE}
+              />
+            </div>
           </button>
           {showNotifications && (
             <div className="absolute right-0 w-64 p-4 bg-white border rounded shadow-lg top-12">
               <ul>
-                <li className="py-2 border-b">Notification 1</li>
-                <li className="py-2 border-b">Notification 2</li>
-                <li className="py-2">Notification 3</li>
+                {!notification.length && "No new messages"}
+                {notification.map((notif) => (
+                  <li
+                    key={notif._id}
+                    className="hover:bg-slate-400 hover:cursor-pointer"
+                    onClick={() => {
+                      setSelectedChat(notif.chat);
+                      setNotification(notification.filter((n) => n !== notif));
+                    }}
+                  >
+                    {notif.chat.isGroupChat
+                      ? `New Message in ${notif.chat.chatName}`
+                      : `New Message from ${getSender(user, notif.chat.users)}`}
+                  </li>
+                ))}
               </ul>
             </div>
           )}

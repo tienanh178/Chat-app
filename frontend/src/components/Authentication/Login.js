@@ -8,6 +8,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isShow, setIsShow] = useState(false);
+  //eslint-disable-next-line
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -17,10 +18,10 @@ const Login = () => {
   };
 
   const submitHandler = async () => {
-    console.log(email, password);
     setIsLoading(true);
     if (!email || !password) {
       toast.error("Please fill all the fields!");
+
       setIsLoading(false);
       return;
     }

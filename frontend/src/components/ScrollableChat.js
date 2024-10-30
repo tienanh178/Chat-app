@@ -1,6 +1,5 @@
 import React from "react";
 import ScrollableFeed from "react-scrollable-feed";
-import Avatar from "react-avatar";
 import { isLastMessage, isSameSender } from "../config/ChatLogics";
 import { ChatState } from "../context/ChatProvider";
 import CustomToolTip from "./CustomToolTip";

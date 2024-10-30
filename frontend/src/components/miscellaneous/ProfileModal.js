@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { ChatState } from "../../context/ChatProvider";
 
 const ProfileModal = ({ children, user }) => {
   const [isOpen, setIsOpen] = useState(false);
